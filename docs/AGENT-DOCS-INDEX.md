@@ -24,13 +24,15 @@ All documentation is organized into three layers. **Start with the knowledge bas
 
 ---
 
-## SDLC slash commands
+## SDLC agents and slash commands
 
-| Command | Purpose |
-|---|---|
-| `/sdlc-orchestrator <feature>` | Full pipeline: Architect → human approval → Senior Engineer → QA → Docs Manager |
-| `/architect <feature>` | Design doc + ADR only |
-| `/senior-engineer <feature-folder>` | Implement + write dev log |
-| `/qa-engineer <feature-folder>` | Test cases + QA handoff |
-| `/evidence <TC-ID>` | Screenshot/log artifact collector |
-| `/docs-manager <task>` | Knowledge synthesis, as-implemented, AGENTS.md updates |
+Role definitions live in `.claude/agents/` (with enforced tool restrictions); the slash commands in `.claude/commands/` are thin entry points that delegate to them via the Task tool.
+
+| Command | Subagent | Purpose |
+|---|---|---|
+| `/sdlc-orchestrator <feature>` | — (orchestrates all) | Full pipeline: Triage → Architect → human approval → Senior Engineer → QA (bounded repair loop) → Docs Manager |
+| `/architect <feature>` | `architect` | Design doc with testable acceptance criteria |
+| `/senior-engineer <feature-folder>` | `senior-engineer` | Test-first implementation + dev log |
+| `/qa-engineer <feature-folder>` | `qa-engineer` | Executable QA tests + PASS/FAIL handoff |
+| `/evidence <TC-ID>` | `evidence` | Screenshot/log artifact collector (read-only) |
+| `/docs-manager <task>` | `docs-manager` | Knowledge synthesis, as-implemented, AGENTS.md updates |

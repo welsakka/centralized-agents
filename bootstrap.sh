@@ -33,7 +33,14 @@ copy_if_missing() {
 echo "Bootstrapping SDLC infrastructure into: $DEST"
 echo ""
 
-# --- Slash commands ---
+# --- Subagents (role definitions with enforced tool restrictions) ---
+echo ">>> .claude/agents/"
+for f in "$SRC/.claude/agents/"*.md; do
+  fname="$(basename "$f")"
+  copy_if_missing "$f" "$DEST/.claude/agents/$fname"
+done
+
+# --- Slash commands (thin wrappers that delegate to the subagents) ---
 echo ">>> .claude/commands/"
 for f in "$SRC/.claude/commands/"*.md; do
   fname="$(basename "$f")"
@@ -61,6 +68,7 @@ copy_if_missing "$SRC/AGENTS.md" "$DEST/AGENTS.md"
 
 echo ""
 echo "Done. Next steps:"
-echo "  1. Fill in docs/knowledge/primer.md with your project's stack and conventions."
+echo "  1. Fill in docs/knowledge/primer.md with your project's stack, test command, and conventions."
 echo "  2. Update AGENTS.md with any project-specific rules."
-echo "  3. Run /sdlc-orchestrator <feature-name> to start your first feature cycle."
+echo "  3. (Recommended) Add a Stop hook running lint + tests to .claude/settings.json — see README 'Enforcement hooks'."
+echo "  4. Run /sdlc-orchestrator <feature-name> to start your first feature cycle."
