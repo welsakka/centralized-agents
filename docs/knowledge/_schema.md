@@ -36,6 +36,8 @@ A pitfall qualifies if it comes from a dev log `P-*` entry, caused a real failur
 
 **Numbering:** `P-DB-001`, `P-DB-002`, `P-FE-001`, `P-PLAID-001`, etc. Continue from the highest existing number in that area. Never reuse a number.
 
+**Pruning:** when an area section grows past **10 active entries**, the Docs Manager consolidates it in the same pass: merge duplicates (keep the older ID, note the merged IDs in its entry), and move entries obsoleted by code changes to an `## Archive` section at the bottom of the file with a one-line reason. Never delete an entry outright and never reuse an archived ID — the history is part of the record.
+
 **What does NOT go in pitfalls:**
 - Design decisions (document the "why" as a `D-*` entry in the dev log instead; pattern-worthy decisions go in `patterns.md`)
 - "Best practices" without a specific failure story
@@ -142,3 +144,4 @@ After synthesizing a dev log, confirm each item before committing:
 - [ ] Feature completed → `primer.md` feature history table + next feature number updated
 - [ ] Any deviations from design → `01-design.md` "As Implemented" section prepended
 - [ ] `primer.md` feature history table → new row added, next feature number updated
+- [ ] Any `pitfalls.md` area section past 10 active entries → pruned per the pruning rule above
