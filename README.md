@@ -14,7 +14,8 @@ Reusable SDLC agent infrastructure for Claude Code projects. Drop this into any 
     qa-engineer.md           verifies with executable tests; never touches prod code
     docs-manager.md          synthesizes knowledge; docs only
     evidence.md              collects artifacts; no write tools at all
-  commands/                Six slash commands — thin entry points that delegate
+    improvement-generator.md ruthless critic; produces one improvement prompt, no code
+  commands/                Seven slash commands — thin entry points that delegate
                            to the subagents via the Task tool
 docs/
   AGENT-DOCS-INDEX.md      Master index — agents start here
@@ -23,6 +24,7 @@ docs/
     primer.md              Template: 1-page codebase snapshot (fill in per project)
     pitfalls.md            Stub: cross-feature gotchas (Docs Manager fills this)
     patterns.md            Stub: recurring code patterns (Docs Manager fills this)
+    improvement-loop.md    Recipe for chaining sdlc-orchestrator cycles autonomously
     integrations/          One .md per external service (created by Docs Manager)
   features/                One folder per feature: design, dev log, QA handoff
 AGENTS.md                  Engineering rules agents read on every session start
@@ -78,6 +80,13 @@ Each step maps to a slash command you can also call standalone:
 | `/qa-engineer <feature-folder>` | Re-test after a hotfix |
 | `/evidence <TC-ID>` | Collect a screenshot or log for a specific test case |
 | `/docs-manager <task>` | Synthesize knowledge after an out-of-band fix |
+| `/improvement-generator <feature-folder> <base-sha>..<head-sha>` | Turn a shipped cycle into the next cycle's feature prompt |
+
+---
+
+## Autonomous improvement loop (optional)
+
+Chain multiple `sdlc-orchestrator` cycles end-to-end: after each cycle ships, `improvement-generator` reads its commits and QA handoff, independently re-verifies the shipped behavior, and writes one evidence-backed prompt for the next cycle — no human authoring a feature request in between. The orchestrator file itself is never modified; autonomy comes from how it's invoked. See [`docs/knowledge/improvement-loop.md`](docs/knowledge/improvement-loop.md) for the full mechanism, the QA-fail handling, and the stopping condition.
 
 ---
 

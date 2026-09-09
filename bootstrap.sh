@@ -49,10 +49,11 @@ done
 
 # --- Knowledge base infrastructure ---
 echo ">>> docs/knowledge/"
-copy_if_missing "$SRC/docs/knowledge/_schema.md"    "$DEST/docs/knowledge/_schema.md"
-copy_if_missing "$SRC/docs/knowledge/primer.md"     "$DEST/docs/knowledge/primer.md"
-copy_if_missing "$SRC/docs/knowledge/pitfalls.md"   "$DEST/docs/knowledge/pitfalls.md"
-copy_if_missing "$SRC/docs/knowledge/patterns.md"   "$DEST/docs/knowledge/patterns.md"
+copy_if_missing "$SRC/docs/knowledge/_schema.md"          "$DEST/docs/knowledge/_schema.md"
+copy_if_missing "$SRC/docs/knowledge/primer.md"           "$DEST/docs/knowledge/primer.md"
+copy_if_missing "$SRC/docs/knowledge/pitfalls.md"         "$DEST/docs/knowledge/pitfalls.md"
+copy_if_missing "$SRC/docs/knowledge/patterns.md"         "$DEST/docs/knowledge/patterns.md"
+copy_if_missing "$SRC/docs/knowledge/improvement-loop.md" "$DEST/docs/knowledge/improvement-loop.md"
 
 # --- Placeholder directories ---
 mkdir -p "$DEST/docs/features"

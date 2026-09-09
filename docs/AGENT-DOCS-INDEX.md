@@ -13,6 +13,7 @@ All documentation is organized into three layers. **Start with the knowledge bas
 | [knowledge/pitfalls.md](knowledge/pitfalls.md) | Before touching a known problem area |
 | [knowledge/patterns.md](knowledge/patterns.md) | Before implementing something new |
 | [knowledge/integrations/](knowledge/integrations/) | Per-service reference files — one per external service |
+| [knowledge/improvement-loop.md](knowledge/improvement-loop.md) | Before chaining multiple `sdlc-orchestrator` cycles autonomously |
 
 ---
 
@@ -36,3 +37,4 @@ Role definitions live in `.claude/agents/` (with enforced tool restrictions); th
 | `/qa-engineer <feature-folder>` | `qa-engineer` | Executable QA tests + PASS/FAIL handoff |
 | `/evidence <TC-ID>` | `evidence` | Screenshot/log artifact collector (read-only) |
 | `/docs-manager <task>` | `docs-manager` | Knowledge synthesis, as-implemented, AGENTS.md updates |
+| `/improvement-generator <feature-folder> <sha-range>` | `improvement-generator` | Reads a shipped cycle, produces one evidence-backed improvement prompt for the next cycle |
